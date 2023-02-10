@@ -1,4 +1,9 @@
 import {GetServerSideProps, NextPage} from "next"
+import dynamic from 'next/dynamic'
+
+const Resp = dynamic(() => import('components/Resp'), {
+  ssr: false,
+})
 
 type Props = {
   q: string | null
@@ -11,12 +16,7 @@ const IndexPage:NextPage<Props> = (context) => {
   return (
     <div>
       Hello World. <br/>
-      <div>
-        Your query is: <br/>
-        <code>
-          {context.q}
-        </code>
-      </div>
+      <Resp qParam={context.q}/>
     </div>
   )
 }
